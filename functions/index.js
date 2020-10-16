@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const {sv} = require('./skey')
 const DayJS = require('dayjs')
 const  utc = require('dayjs/plugin/utc')
+var cors = require('cors')
 
 const svaKey = sv
 
@@ -13,6 +14,11 @@ admin.initializeApp({
     databaseURL: "https://resume-7e186.firebaseio.com"
   })
 const app = express();
+var corsOptions = {
+    origin: 'https://iogod.github.io',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+app.use(cors(corsOptions))
 app.use(bodyParser.urlencoded({extended:true}))
 DayJS.extend(utc)
 
